@@ -1,4 +1,4 @@
-const API_URL = "/api";
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Helper to include auth token
 function authHeaders() {
