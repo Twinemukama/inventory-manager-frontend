@@ -12,8 +12,8 @@ import NewCategory from "../components/NewCategory.vue";
 const routes = [
     {
         path: "/",
-        name: "Home",
-        component: Home,
+        name: "signup",
+        component: Signup,
     },
     {
         path: "/login",
