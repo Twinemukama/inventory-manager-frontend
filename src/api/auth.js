@@ -13,6 +13,7 @@ export async function fetchMe() {
     headers: authHeaders(),
   });
   if (!res.ok) throw new Error("Failed to fetch user");
+  console.log("fetchMe response:", res.json());
   return await res.json();
 }
 export async function loginUser(credentials) {
@@ -31,4 +32,10 @@ export async function signupUser(data) {
     body: JSON.stringify(data),
   });
   return await res.json();
+}
+
+export async function fetchCompanies() {
+  const res = await fetch(`${API_URL}/companies`)
+  const data = await res.json()
+  return data
 }
