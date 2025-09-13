@@ -12,6 +12,9 @@ const userInitial = computed(() =>
   user.value?.email?.[0]?.toUpperCase() ||
   "?"
 );
+const companyName = computed(() =>
+  user.value?.company?.name || user.value?.companyName || ""
+);
 const showTooltip = ref(false);
 
 function handleLogout() {
@@ -27,6 +30,9 @@ function handleLogout() {
     </div>
 
     <div class="navRight">
+      <span v-if="isLoggedIn && companyName" class="companyName">
+        {{ companyName }}
+      </span>
       <div
         v-if="isLoggedIn"
         class="initialCircle"
@@ -49,20 +55,21 @@ function handleLogout() {
     </div>
   </nav>
 </template>
+
 <style scoped>
 .navBar {
-  position: fixed;        /* Stay on top during scroll */
-  top: 0;                 /* Stick to the top */
+  position: fixed;
+  top: 0;
   left: 0;
-  right: 0;               /* Full width */
-  z-index: 1000;          /* On top of other elements */
+  right: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   background: var(--primary-bg);
   color: var(--primary-text);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional nice shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navTitle {
@@ -72,6 +79,13 @@ function handleLogout() {
 .navRight {
   display: flex;
   align-items: center;
+}
+.companyName {
+  margin-right: 16px;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--primary-text);
+  letter-spacing: 0.5px;
 }
 .initialCircle {
   width: 40px;
@@ -85,7 +99,7 @@ function handleLogout() {
   font-size: 20px;
   font-weight: 900;
   margin-right: 10px;
-  position: relative; /* Add this */
+  position: relative;
 }
 .initialCircle:hover {
   cursor: pointer;
@@ -103,12 +117,12 @@ function handleLogout() {
 }
 .userTooltip {
   position: absolute;
-  top: 110%; /* Just below the circle */
+  top: 110%;
   left: 50%;
   transform: translateX(-50%);
   background: var(--primary-bg);
   color: var(--primary-text);
-  min-width: 180px; /* Wider tooltip */
+  min-width: 180px;
   padding: 10px 16px;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
